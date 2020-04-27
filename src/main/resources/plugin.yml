@@ -1,0 +1,6 @@
+name: "Dice"
+author: "Hacone"
+version: "0.1.0"
+main: "com.Hacone.DicePluginMain"
+info: ""
+depends: []
