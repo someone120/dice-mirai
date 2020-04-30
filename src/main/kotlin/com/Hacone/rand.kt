@@ -2,6 +2,12 @@ package com.Hacone
 
 
 class rand {
+
+    /**
+     * 表达式：.ra 事件 概率\n
+     * 投出一个100面骰，当点数>概率时检测失败。
+     */
+
     fun ra(it: String, nick: String): String {
         val data = it.split(" ")
         val rand = (0..100).random()
@@ -10,8 +16,14 @@ class rand {
         if (rand <= tryNum) {
             result = "成功"
         }
-        return "${nick}进行${data[0]}检测:D100=$rand/$tryNum\n结果:$result"
+        return "${nick}进行${data[0]}判定:D100=$rand/$tryNum\n结果:$result"
     }
+
+    /**
+     * 表达式：.r XdY\n
+     * 投出X个Y面骰
+     */
+
     fun moreRand(num: Int, range: Int): MutableList<Int> {
         val numList = mutableListOf<Int>()
         for (i in 1..num) {
@@ -19,8 +31,15 @@ class rand {
         }
         return numList
     }
+
+    /**
+     * 解析表达式
+     * 表达式：.r XdY
+     * 投出X个Y面骰
+     */
+
     @ExperimentalStdlibApi
-    fun r(v: MatchResult, nick: String) :String{
+    fun r(v: MatchResult, nick: String): String {
         val data = v.value.split(" ")[1].split("+")
         var size = 0
         for (i in data) {
