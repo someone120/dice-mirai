@@ -1,5 +1,7 @@
 package com.Hacone
 
+import java.util.*
+
 
 class rand {
 
@@ -7,7 +9,8 @@ class rand {
      * 表达式：.ra 事件 概率\n
      * 投出一个100面骰，当点数>概率时检测失败。
      */
-
+    var rp = mutableMapOf<Long, Int>()
+    var date = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
     fun ra(it: String, nick: String): String {
         val data = it.split(" ")
         val rand = (0..100).random()
@@ -37,7 +40,6 @@ class rand {
      * 表达式：.r XdY
      * 投出X个Y面骰
      */
-
     @ExperimentalStdlibApi
     fun r(v: MatchResult, nick: String): String {
         val data = v.value.split(" ")[1].split("+")
@@ -76,5 +78,16 @@ class rand {
             }
             return result.toString()
         }
+    }
+
+    fun jrrp(ID: Long): String {
+        if (rp.any { it.key == ID }) {
+            if (date == Calendar.getInstance().get(Calendar.DAY_OF_MONTH)) {
+                return rp.get(ID).toString()
+            }
+        }
+        val rd = (0..100).random()
+        rp.set(ID, rd)
+        return rd.toString()
     }
 }
